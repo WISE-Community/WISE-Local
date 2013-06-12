@@ -1,0 +1,16 @@
+Jun 11, 2013 10:41:55 AM org.apache.catalina.core.ApplicationContext log
+INFO: No Spring WebApplicationInitializer types detected on classpath
+Jun 11, 2013 10:41:55 AM org.apache.catalina.core.ApplicationContext log
+INFO: Set web app root system property: 'webapp.root' = [/Users/h/wise4demo/WISE4.7demo/tomcat/webapps/webapp/]
+Jun 11, 2013 10:41:55 AM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing log4j from [/Users/h/wise4demo/WISE4.7demo/tomcat/webapps/webapp/WEB-INF/classes/log4j.properties]
+Jun 11, 2013 10:41:55 AM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring root WebApplicationContext
+Jun 11, 2013 10:42:00 AM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring FrameworkServlet 'dispatcher'
+Jun 11, 2013 10:42:32 AM org.apache.catalina.core.ApplicationContext log
+INFO: Destroying Spring FrameworkServlet 'dispatcher'
+Jun 11, 2013 10:42:32 AM org.apache.catalina.core.ApplicationContext log
+INFO: Closing Spring root WebApplicationContext
+Jun 11, 2013 10:42:32 AM org.apache.catalina.core.ApplicationContext log
+INFO: Shutting down log4j
