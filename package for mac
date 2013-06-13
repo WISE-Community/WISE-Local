@@ -26,8 +26,8 @@ cd $PRGDIR
 # clean out tomcat's logs, work, temp and database dir
 rm -rf tomcat/logs/* tomcat/work/* tomcat/temp/* tomcat/database/* tomcat/webapps/vlewapper* tomcat/webapps/webapp*
 
-# make target directory
-mkdir target
+# make target logs, work, temp directory
+mkdir target tomcat/logs tomcat/work tomcat/temp
 
 # create vlewrapper.war
 cd vlewrapper
