@@ -1,11 +1,37 @@
 #!/bin/sh
 
-# delete existing zip file
-rm wise4local.zip
+# Better OS/400 detection: see Bugzilla 31132
+os400=false
+case "`uname`" in
+OS400*) os400=true;;
+esac
+
+# resolve links - $0 may be a softlink
+PRG="$0"
+
+while [ -h "$PRG" ] ; do
+  ls=`ls -ld "$PRG"`
+  link=`expr "$ls" : '.*-> \(.*\)$'`
+  if expr "$link" : '/.*' > /dev/null; then
+    PRG="$link"
+  else
+    PRG=`dirname "$PRG"`/"$link"
+  fi
+done
+
+PRGDIR=`dirname "$PRG"`
+
+cd $PRGDIR
+
+# clean out tomcat's logs, work, temp and database dir
+rm -rf tomcat/logs/* tomcat/work/* tomcat/temp/* tomcat/database/* tomcat/webapps/vlewapper* tomcat/webapps/webapp*
+
+# make target directory
+mkdir target
 
 # create vlewrapper.war
 cd vlewrapper
-mvn -Dmaven.test.skip=true package
+mvn -Dmaven.test.skip=true clean compile package
 
 cd ..
 # copy the war file to tomcat/webapps
@@ -14,11 +40,13 @@ cp vlewrapper/target/vlewrapper.war tomcat/webapps/
 
 # create webapp.war
 cd portal
-mvn -Dmaven.test.skip=true package
+mvn -Dmaven.test.skip=true clean compile package
 
 cd ..
 
 # copy the war file to tomcat/webapps
 cp portal/target/webapp.war tomcat/webapps/
 
-zip -r wise4local.zip README.txt "START WISE" "STOP WISE" "WISE Homepage.webloc" tomcat
+zip -r target/wise4local_`/bin/date +\%Y\%m\%d_\%H\%M_\%Z`.zip README.txt "START WISE" "STOP WISE" "WISE Homepage.webloc" tomcat
+
+echo "Done, hopefully. Look inside the target directory for the goods!"
