@@ -49,4 +49,4 @@ cp portal/target/webapp.war tomcat/webapps/
 
 zip -r target/wise4local_`/bin/date +\%Y\%m\%d_\%H\%M_\%Z`.zip README.txt "START WISE" "STOP WISE" "WISE Homepage.webloc" tomcat
 
-echo "Done, hopefully. Look inside the target directory for the goods!"
+echo "Done. Look inside the 'target' directory for the zip file."

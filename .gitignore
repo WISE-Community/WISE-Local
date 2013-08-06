@@ -1,4 +1,11 @@
 *~
+WISE Homepage.webloc-e
 target
 tomcat/webapps/webapp.war
+tomcat/webapps/webapp
 tomcat/webapps/vlewrapper.war
+tomcat/webapps/vlewrapper
+tomcat/database
+tomcat/logs
+tomcat/temp
+tomcat/work
