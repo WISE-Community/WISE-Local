@@ -84,7 +84,9 @@ echo "hibernate.connection.password=" >> "$PRGDIR"/"$PORTALPROPERTIES"
 echo "hibernate.connection.url=jdbc:hsqldb:file:$PRGDIR/tomcat/database/sail_database;user=sa;shutdown=true" >> "$PRGDIR"/"$PORTALPROPERTIES" 
 echo "hibernate.connection.driver_class=org.hsqldb.jdbcDriver" >> "$PRGDIR"/"$PORTALPROPERTIES" 
 echo "hibernate.dialect=org.hibernate.dialect.HSQLDialect" >> "$PRGDIR"/"$PORTALPROPERTIES" 
-echo "hibernate.hbm2ddl.auto=create" >> "$PRGDIR"/"$PORTALPROPERTIES" 
+if [ ! -f "$PRGDIR/tomcat/database/sail_database.script" ]; then
+	echo "hibernate.hbm2ddl.auto=create" >> "$PRGDIR"/"$PORTALPROPERTIES"
+fi
 echo "hibernate.showsql=true" >> "$PRGDIR"/"$PORTALPROPERTIES" 
 
 # Set user ip address in portal.properties. Need to do this each time as the address may have changed since last time WISELocal was run.
@@ -106,7 +108,9 @@ echo "hibernate.connection.password=" >> "$PRGDIR"/"$VLEPROPERTIES"
 echo "hibernate.connection.url=jdbc:hsqldb:file:$PRGDIR/tomcat/database/vle_database;user=sa;shutdown=true" >> "$PRGDIR"/"$VLEPROPERTIES" 
 echo "hibernate.connection.driver_class=org.hsqldb.jdbcDriver" >> "$PRGDIR"/"$VLEPROPERTIES" 
 echo "hibernate.dialect=org.hibernate.dialect.HSQLDialect" >> "$PRGDIR"/"$VLEPROPERTIES" 
-echo "hibernate.hbm2ddl.auto=create" >> "$PRGDIR"/"$VLEPROPERTIES" 
+if [ ! -f "$PRGDIR/tomcat/database/vle_database.script" ]; then
+	echo "hibernate.hbm2ddl.auto=create" >> "$PRGDIR"/"$VLEPROPERTIES"
+fi
 echo "hibernate.showsql=true" >> "$PRGDIR"/"$VLEPROPERTIES" 
 
 # Set user ip address in vle.properties. Need to do this each time as the address may have changed since last time WISELocal was run.
