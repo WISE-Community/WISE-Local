@@ -96,6 +96,18 @@ Running With JRE 6.0 Or Later
 (2) You can also create a new student account using the "Create Account" button.
 
 =============================
+   LOGGING IN AS AN ADMIN
+=============================
+
+(1) In the homepage, you can log in as a WISE administrator:
+	username: admin
+	password: pass
+
+As an administrator, you can manage user accounts, runs, projects, and news items.	
+
+Here's a guide for WISE administrators: https://github.com/WISE-Community/WISE/wiki/WISE4-Administrator-Resources	
+
+=============================
       STOPPING WISE4
 =============================
 
