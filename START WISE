@@ -73,6 +73,10 @@ fi
 
 # copy portal_sample.properties to portal.properties, fill in appropriate values
 cp "$PRGDIR"/"$PORTALSAMPLEPROPERTIES" "$PRGDIR"/"$PORTALPROPERTIES"
+
+# before we start appending, make sure the file ends in a new line
+echo "" >> "$PRGDIR"/"$PORTALPROPERTIES"
+
 # append curriculum_base_dir to portal.properties
 echo "curriculum_base_dir=$PRGDIR/$CURRICULUMDIR" >> "$PRGDIR"/"$PORTALPROPERTIES"
 # append studentuploads_base_dir to portal.properties
@@ -100,6 +104,10 @@ fi
 
 # copy vle_sample.properties to vle.properties, fill in appropriate values
 cp "$PRGDIR"/"$VLESAMPLEPROPERTIES" "$PRGDIR"/"$VLEPROPERTIES"
+
+# before we start appending, make sure the file ends in a new line
+echo "" >> "$PRGDIR"/"$VLEPROPERTIES"
+
 # append vlewrapperBaseDir to vle.properties
 echo "vlewrapperBaseDir=$PRGDIR/$VLEWRAPPERDIR" >> "$PRGDIR"/"$VLEPROPERTIES"
 # append hibernate settings
