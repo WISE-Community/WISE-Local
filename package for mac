@@ -26,11 +26,13 @@ cd $PRGDIR
 # clean out tomcat's logs, work, temp and database dir
 rm -rf tomcat/logs/* tomcat/work/* tomcat/temp/* tomcat/database/* tomcat/webapps/vlewrapper* tomcat/webapps/webapp*
 
-# clean out curriculum except 1,2,3,4 folders
+# clean out curriculum except 1,2,3,4,5,6 folders
 mv tomcat/webapps/curriculum/1 .
 mv tomcat/webapps/curriculum/2 .
 mv tomcat/webapps/curriculum/3 .
 mv tomcat/webapps/curriculum/4 .
+mv tomcat/webapps/curriculum/5 .
+mv tomcat/webapps/curriculum/6 .
 
 rm -rf tomcat/webapps/curriculum/*
 
@@ -38,6 +40,8 @@ mv 1 tomcat/webapps/curriculum/
 mv 2 tomcat/webapps/curriculum/
 mv 3 tomcat/webapps/curriculum/
 mv 4 tomcat/webapps/curriculum/
+mv 5 tomcat/webapps/curriculum/
+mv 6 tomcat/webapps/curriculum/
 
 # make target logs, work, temp directory
 mkdir target tomcat/logs tomcat/work tomcat/temp
