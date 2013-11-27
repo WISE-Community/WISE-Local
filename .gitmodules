@@ -1,6 +1,3 @@
-[submodule "vlewrapper"]
-	path = vlewrapper
-	url = git://github.com/WISE-Community/WISE-VLE.git
-[submodule "portal"]
-	path = portal
-	url = git://github.com/WISE-Community/WISE-Portal.git
+[submodule "wise"]
+	path = wise
+	url = git://github.com/WISE-Community/WISE.git

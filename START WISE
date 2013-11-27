@@ -25,15 +25,10 @@ unset CATALINA_BASE
 
 PRGDIR=`dirname "$PRG"`
 START_EXECUTABLE=tomcat/bin/startup.sh
-PORTALSAMPLEPROPERTIES=tomcat/webapps/webapp/WEB-INF/classes/portal_sample.properties
-PORTALPROPERTIES=tomcat/webapps/webapp/WEB-INF/classes/portal.properties
-WEBAPPDIR=tomcat/webapps/webapp
-WEBAPPWAR=tomcat/webapps/webapp.war
-
-VLESAMPLEPROPERTIES=tomcat/webapps/vlewrapper/WEB-INF/classes/vle_sample.properties
-VLEPROPERTIES=tomcat/webapps/vlewrapper/WEB-INF/classes/vle.properties
-VLEWRAPPERDIR=tomcat/webapps/vlewrapper
-VLEWRAPPERWAR=tomcat/webapps/vlewrapper.war
+WISESAMPLEPROPERTIES=tomcat/webapps/wise/WEB-INF/classes/wise_sample.properties
+WISEPROPERTIES=tomcat/webapps/wise/WEB-INF/classes/wise.properties
+WISEDIR=tomcat/webapps/wise
+WISEWAR=tomcat/webapps/wise.war
 
 CURRICULUMDIR=tomcat/webapps/curriculum
 
@@ -65,67 +60,40 @@ echo "WISE_USER_IP: $WISE_USER_IP"
 
 
 
-# Check if portal.properties exists. if it doesn't, unzip webapp.war
-if [ ! -f "$PRGDIR"/"$PORTALPROPERTIES" ]; then
-   echo "unzipping webapp.war file and setting values in portal.properties"
-   unzip "$PRGDIR"/"$WEBAPPWAR" -d "$PRGDIR"/"$WEBAPPDIR"
+# Check if wise.properties exists. if it doesn't, unzip wise.war
+if [ ! -f "$PRGDIR"/"$WISEPROPERTIES" ]; then
+   echo "unzipping wise.war file and setting values in wise.properties"
+   unzip "$PRGDIR"/"$WISEWAR" -d "$PRGDIR"/"$WISEDIR"
 fi
 
 # copy portal_sample.properties to portal.properties, fill in appropriate values
-cp "$PRGDIR"/"$PORTALSAMPLEPROPERTIES" "$PRGDIR"/"$PORTALPROPERTIES"
+#cp "$PRGDIR"/"$WISESAMPLEPROPERTIES" "$PRGDIR"/"$WISEPROPERTIES"
 
 # before we start appending, make sure the file ends in a new line
-echo "" >> "$PRGDIR"/"$PORTALPROPERTIES"
+echo "" >> "$PRGDIR"/"$WISEPROPERTIES"
 
 # append curriculum_base_dir to portal.properties
-echo "curriculum_base_dir=$PRGDIR/$CURRICULUMDIR" >> "$PRGDIR"/"$PORTALPROPERTIES"
+echo "curriculum_base_dir=$PRGDIR/$CURRICULUMDIR" >> "$PRGDIR"/"$WISEPROPERTIES"
 # append studentuploads_base_dir to portal.properties
-echo "studentuploads_base_dir=$PRGDIR/$STUDENTUPLOADSDIR" >> "$PRGDIR"/"$PORTALPROPERTIES"
+echo "studentuploads_base_dir=$PRGDIR/$STUDENTUPLOADSDIR" >> "$PRGDIR"/"$WISEPROPERTIES"
 # append hibernate settings
-echo "dbType=hsqldb" >> "$PRGDIR"/"$PORTALPROPERTIES" 
-echo "hibernate.connection.username=sa" >> "$PRGDIR"/"$PORTALPROPERTIES" 
-echo "hibernate.connection.password=" >> "$PRGDIR"/"$PORTALPROPERTIES" 
-echo "hibernate.connection.url=jdbc:hsqldb:file:$PRGDIR/tomcat/database/sail_database;user=sa;shutdown=true" >> "$PRGDIR"/"$PORTALPROPERTIES" 
-echo "hibernate.connection.driver_class=org.hsqldb.jdbcDriver" >> "$PRGDIR"/"$PORTALPROPERTIES" 
-echo "hibernate.dialect=org.hibernate.dialect.HSQLDialect" >> "$PRGDIR"/"$PORTALPROPERTIES" 
-if [ ! -f "$PRGDIR/tomcat/database/sail_database.script" ]; then
-	echo "hibernate.hbm2ddl.auto=create" >> "$PRGDIR"/"$PORTALPROPERTIES"
+echo "dbType=hsqldb" >> "$PRGDIR"/"$WISEPROPERTIES" 
+echo "hibernate.connection.username=sa" >> "$PRGDIR"/"$WISEPROPERTIES" 
+echo "hibernate.connection.password=" >> "$PRGDIR"/"$WISEPROPERTIES" 
+echo "hibernate.connection.url=jdbc:hsqldb:file:$PRGDIR/tomcat/database/wise_database;user=sa;shutdown=true" >> "$PRGDIR"/"$WISEPROPERTIES" 
+echo "hibernate.connection.driver_class=org.hsqldb.jdbcDriver" >> "$PRGDIR"/"$WISEPROPERTIES" 
+echo "hibernate.dialect=org.hibernate.dialect.HSQLDialect" >> "$PRGDIR"/"$WISEPROPERTIES" 
+if [ ! -f "$PRGDIR/tomcat/database/wise_database.script" ]; then
+	echo "hibernate.hbm2ddl.auto=create" >> "$PRGDIR"/"$WISEPROPERTIES"
 fi
-echo "hibernate.showsql=true" >> "$PRGDIR"/"$PORTALPROPERTIES" 
+echo "hibernate.showsql=true" >> "$PRGDIR"/"$WISEPROPERTIES" 
 
 # Set user ip address in portal.properties. Need to do this each time as the address may have changed since last time WISELocal was run.
-sed -i -e "s/localhost/$WISE_USER_IP/g" "$PRGDIR"/"$PORTALPROPERTIES"
+sed -i -e "s/localhost/$WISE_USER_IP/g" "$PRGDIR"/"$WISEPROPERTIES"
 
-# Check if vle.properties exists. if it doesn't, unzip vlewrapper.war and fill in appropriate values
-if [ ! -f "$PRGDIR"/"$VLEPROPERTIES" ]; then
-   echo "unzipping vlewrapper.war file and setting values in vle.properties"
-   unzip "$PRGDIR"/"$VLEWRAPPERWAR" -d "$PRGDIR"/"$VLEWRAPPERDIR"
-fi
-
-# copy vle_sample.properties to vle.properties, fill in appropriate values
-cp "$PRGDIR"/"$VLESAMPLEPROPERTIES" "$PRGDIR"/"$VLEPROPERTIES"
-
-# before we start appending, make sure the file ends in a new line
-echo "" >> "$PRGDIR"/"$VLEPROPERTIES"
-
-# append vlewrapperBaseDir to vle.properties
-echo "vlewrapperBaseDir=$PRGDIR/$VLEWRAPPERDIR" >> "$PRGDIR"/"$VLEPROPERTIES"
-# append hibernate settings
-echo "hibernate.connection.username=sa" >> "$PRGDIR"/"$VLEPROPERTIES" 
-echo "hibernate.connection.password=" >> "$PRGDIR"/"$VLEPROPERTIES" 
-echo "hibernate.connection.url=jdbc:hsqldb:file:$PRGDIR/tomcat/database/vle_database;user=sa;shutdown=true" >> "$PRGDIR"/"$VLEPROPERTIES" 
-echo "hibernate.connection.driver_class=org.hsqldb.jdbcDriver" >> "$PRGDIR"/"$VLEPROPERTIES" 
-echo "hibernate.dialect=org.hibernate.dialect.HSQLDialect" >> "$PRGDIR"/"$VLEPROPERTIES" 
-if [ ! -f "$PRGDIR/tomcat/database/vle_database.script" ]; then
-	echo "hibernate.hbm2ddl.auto=create" >> "$PRGDIR"/"$VLEPROPERTIES"
-fi
-echo "hibernate.showsql=true" >> "$PRGDIR"/"$VLEPROPERTIES" 
-
-# Set user ip address in vle.properties. Need to do this each time as the address may have changed since last time WISELocal was run.
-sed -i -e "s/localhost/$WISE_USER_IP/g" "$PRGDIR"/"$VLEPROPERTIES"
 
 # Set user ip address in WISE Homepage webloc file. Need to do this each time as the address may have changed since last time WISELocal was run.
-sed -i -e "s/<string>.*<\/string>/<string>http:\/\/$WISE_USER_IP:8080\/webapp\/index.html<\/string>/g" "$PRGDIR"/"$WISEHOMEPAGEWEBLOC"
+sed -i -e "s/<string>.*<\/string>/<string>http:\/\/$WISE_USER_IP:8080\/wise\/index.html<\/string>/g" "$PRGDIR"/"$WISEHOMEPAGEWEBLOC"
 
 # Check that target executable exists
 if $os400; then
