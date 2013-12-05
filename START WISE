@@ -67,7 +67,7 @@ if [ ! -f "$PRGDIR"/"$WISEPROPERTIES" ]; then
 fi
 
 # copy portal_sample.properties to portal.properties, fill in appropriate values
-#cp "$PRGDIR"/"$WISESAMPLEPROPERTIES" "$PRGDIR"/"$WISEPROPERTIES"
+cp "$PRGDIR"/"$WISESAMPLEPROPERTIES" "$PRGDIR"/"$WISEPROPERTIES"
 
 # before we start appending, make sure the file ends in a new line
 echo "" >> "$PRGDIR"/"$WISEPROPERTIES"
