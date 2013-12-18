@@ -238,7 +238,7 @@ fi
 #JAVA_OPTS="$JAVA_OPTS -Dorg.apache.catalina.security.SecurityListener.UMASK=`umask`"
 
 # ----- Execute The Requested Command -----------------------------------------
-JAVA_OPTS="$JAVA_OPTS -Xms768m -Xmx1024m -XX:PermSize=768m -XX:MaxPermSize=1024m"
+JAVA_OPTS="$JAVA_OPTS -Xms1024m -Xmx2048m -XX:PermSize=1024m -XX:MaxPermSize=2048m"
 
 # Bugzilla 37848: only output this if we have a TTY
 if [ $have_tty -eq 1 ]; then
