@@ -112,3 +112,4 @@ else
 fi
 
 exec "$PRGDIR"/"$START_EXECUTABLE" start "$@"
+
